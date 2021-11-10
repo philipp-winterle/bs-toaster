@@ -2,7 +2,7 @@
 
 A Bootstrap 5 Toast Framework - Easy to use. No other dependencies than Bootstrap itself.
 
-![CI Build Status](https://github.com/hummal/bs-toaster/workflows/yarn/badge.svg?branch=master)
+![CI Build Status](https://github.com/hummal/bs-toaster/workflows/yarn.yml/badge.svg?branch=master)
 ![GitHub release](https://img.shields.io/github/release/hummal/bs-toaster.svg?style=flat-square)
 ![npm](https://img.shields.io/npm/dt/bs-toaster.svg?style=flat-square&label=NPM+Downloads)
 ![Github Releases](https://img.shields.io/github/downloads/hummal/bs-toaster/total.svg?style=flat-square&label=Github+Downloads)
