@@ -1,0 +1,7 @@
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Code
+node_modules

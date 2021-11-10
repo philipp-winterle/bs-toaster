@@ -1,0 +1,41 @@
+{
+    "name": "bs-toaster",
+    "version": "1.0.0",
+    "description": "A Boostrap 5 Toast Framework. Easy to use and no other dependecies than Bootstrap itself.",
+    "keywords": [
+        "bootstrap-toast",
+        "toast",
+        "toasts",
+        "toaster",
+        "notification",
+        "notifications",
+        "bootstrap",
+        "bootstraptoast",
+        "bootstrap5",
+        "bs-toaster"
+    ],
+    "main": "dist/js/Toaster.js",
+    "repository": "https://github.com/hummal/bs-toaster.git",
+    "bugs": {
+        "url": "ttps://github.com/hummal/bs-toaster/issues"
+    },
+    "homepage": "ttps://github.com/hummal/bs-toaster",
+    "author": "philipp.winterle <philipp.winterle@gmail.com>",
+    "type": "module",
+    "engines": {
+        "node": ">=14"
+    },
+    "license": "MIT",
+    "dependencies": {
+        "@popperjs/core": "^2.10.2",
+        "bootstrap": "^5.1.3"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\"",
+        "build": "node build.js"
+    },
+    "devDependencies": {
+        "esbuild": "^0.13.13",
+        "prettier": "^2.4.1"
+    }
+}
