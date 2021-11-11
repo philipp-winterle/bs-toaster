@@ -11,7 +11,7 @@ A Bootstrap 5 Toast Framework - Easy to use. No other dependencies than Bootstra
 
 > After using Bootstrap Toasts is nice but affords a lot of work to make them dynamic I created a ESM module framework for using orgininal Toasts without any additional dependecies as icons or stuff.
 >
-> Simple create an instance of bs-toaster and create multiple toasts without any hussle with native Bootstrap 5! :muscle:
+> Simple create an instance of bs-toaster and create multiple toasts without any effort with native Bootstrap 5! :muscle:
 
 #### Feature Facts
 
