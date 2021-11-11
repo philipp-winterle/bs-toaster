@@ -63,18 +63,19 @@ class Toaster {
 
     constructor(
         options = {
-            position: TOAST_POSITION.BOTTOM_END,
-            type: TOAST_TYPE.DEFAULT,
-            timer: TOAST_TIMER.ELAPSED,
-            delay: DEFAULT_DELAY,
-            defaultIconMarkup: DEFAULT_ICON_MARKUP,
+            position,
+            type,
+            timer,
+            delay,
+            defaultIconMarkup,
         }
     ) {
-        this.position = options.position;
-        this.type = options.type;
-        this.timer = options.timer;
-        this.delay = options.delay;
-        this.defaultIconMarkup = options.defaultIconMarkup;
+        this.position = options.position || TOAST_POSITION.BOTTOM_END;
+        this.type = options.type || TOAST_TYPE.DEFAULT;
+        this.timer = options.timer || TOAST_TIMER.ELAPSED;
+        this.delay = options.delay || DEFAULT_DELAY;
+        this.defaultIconMarkup =
+            options.defaultIconMarkup || DEFAULT_ICON_MARKUP;
 
         this.toastContainer = this.createToastContainer();
         this.templateNode = this.createToastNode();
@@ -142,33 +143,35 @@ class Toaster {
         title,
         text,
         options = {
-            iconMarkup: this.defaultIconMarkup,
-            type: this.type,
-            timer: this.timer,
-            delay: this.delay,
-            animation: true,
+            iconMarkup,
+            type,
+            timer,
+            delay,
+            animation,
         }
     ) {
+        // Set Options Defaults
+        const type = options.type || this.type;
+        const timer = options.timer || this.timer;
+        const delay = options.delay || this.delay;
+        const animation = options.animation || this.animation;
+        let iconMarkup = options.iconMarkup || this.defaultIconMarkup;
+
         // Clone template
         const toastNode = this.templateNode.cloneNode(true);
 
-        // Manage Data
-
         // Set attributes
         toastNode.dataset.bsAutohide = (
-            Number.isInteger(options.delay) && options.delay > 0
+            Number.isInteger(delay) && delay > 0
         ).toString();
-        toastNode.dataset.bsDelay = options.delay.toString();
-        toastNode.dataset.bsAnimation = options.animation.toString();
+        toastNode.dataset.bsDelay = delay.toString();
+        toastNode.dataset.bsAnimation = animation.toString();
 
         // Set content
         const iconNode = toastNode.querySelector(".bs-toaster-icon");
-        if (options.iconMarkup) {
-            options.iconMarkup = options.iconMarkup.replace(
-                "%TYPE%",
-                options.type
-            ); // Replace ICON Type if exists
-            iconNode.innerHTML = options.iconMarkup;
+        if (iconMarkup) {
+            iconMarkup = iconMarkup.replace("%TYPE%", type); // Replace ICON Type if exists
+            iconNode.innerHTML = iconMarkup;
         } else {
             iconNode.remove();
         }
@@ -177,7 +180,7 @@ class Toaster {
         toastNode.querySelector(".bs-toaster-text").innerHTML = text;
 
         const timerNode = toastNode.querySelector(".bs-toaster-timer");
-        this.renderTime(options.timer, options.delay, timerNode, toastNode);
+        this.renderTime(timer, delay, timerNode, toastNode);
 
         this.render(toastNode);
     }
