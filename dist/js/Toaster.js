@@ -5019,12 +5019,12 @@ var TOAST_TEMPLATE = `
 </div>
 `;
 var Toaster = class {
-  constructor({
-    position = TOAST_POSITION.BOTTOM_END,
-    type = TOAST_TYPE.DEFAULT,
-    timer = TOAST_TIMER.ELAPSED,
-    delay = DEFAULT_DELAY,
-    defaultIconMarkup = DEFAULT_ICON_MARKUP
+  constructor(options = {
+    position: TOAST_POSITION.BOTTOM_END,
+    type: TOAST_TYPE.DEFAULT,
+    timer: TOAST_TIMER.ELAPSED,
+    delay: DEFAULT_DELAY,
+    defaultIconMarkup: DEFAULT_ICON_MARKUP
   }) {
     __publicField(this, "position", TOAST_POSITION.BOTTOM_END);
     __publicField(this, "type", TOAST_TYPE.DEFAULT);
@@ -5033,11 +5033,11 @@ var Toaster = class {
     __publicField(this, "defaultIconMarkup", DEFAULT_ICON_MARKUP);
     __publicField(this, "templateNode", null);
     __publicField(this, "toastContainer", null);
-    this.position = position;
-    this.type = type;
-    this.timer = timer;
-    this.delay = delay;
-    this.defaultIconMarkup = defaultIconMarkup;
+    this.position = options.position;
+    this.type = options.type;
+    this.timer = options.timer;
+    this.delay = options.delay;
+    this.defaultIconMarkup = options.defaultIconMarkup;
     this.toastContainer = this.createToastContainer();
     this.templateNode = this.createToastNode();
     document.body.appendChild(this.toastContainer);
@@ -5083,28 +5083,28 @@ var Toaster = class {
       }
     }
   }
-  create(title, text, {
-    iconMarkup = this.defaultIconMarkup,
-    type = this.type,
-    timer = this.timer,
-    delay = this.delay,
-    animation = true
+  create(title, text, options = {
+    iconMarkup: this.defaultIconMarkup,
+    type: this.type,
+    timer: this.timer,
+    delay: this.delay,
+    animation: true
   }) {
     const toastNode = this.templateNode.cloneNode(true);
-    toastNode.dataset.bsAutohide = (Number.isInteger(delay) && delay > 0).toString();
-    toastNode.dataset.bsDelay = delay.toString();
-    toastNode.dataset.bsAnimation = animation.toString();
+    toastNode.dataset.bsAutohide = (Number.isInteger(options.delay) && options.delay > 0).toString();
+    toastNode.dataset.bsDelay = options.delay.toString();
+    toastNode.dataset.bsAnimation = options.animation.toString();
     const iconNode = toastNode.querySelector(".bs-toaster-icon");
-    if (iconMarkup) {
-      iconMarkup = iconMarkup.replace("%TYPE%", type);
-      iconNode.innerHTML = iconMarkup;
+    if (options.iconMarkup) {
+      options.iconMarkup = options.iconMarkup.replace("%TYPE%", options.type);
+      iconNode.innerHTML = options.iconMarkup;
     } else {
       iconNode.remove();
     }
     toastNode.querySelector(".bs-toaster-title").innerHTML = title;
     toastNode.querySelector(".bs-toaster-text").innerHTML = text;
     const timerNode = toastNode.querySelector(".bs-toaster-timer");
-    this.renderTime(timer, delay, timerNode, toastNode);
+    this.renderTime(options.timer, options.delay, timerNode, toastNode);
     this.render(toastNode);
   }
   render(toastNode) {
