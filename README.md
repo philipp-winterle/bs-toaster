@@ -19,6 +19,10 @@ A Bootstrap 5 Toast Framework - Easy to use. No other dependencies than Bootstra
 -   Modern browser support. No IE sorry
 -   :boom: Support of custom icon markup :boom: :metal:
 
+## Demo
+
+[Simple Demo](https://hummal.github.io/bs-toaster/examples/simple.html)
+
 ## Getting Started
 
 ### Supported Browsers
