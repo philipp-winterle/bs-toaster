@@ -15,7 +15,9 @@
                         ToasterType,
                     } from "https://hummal.github.io/bs-toaster/dist/js/Toaster.js";
 
-            const simpleToaster = new Toaster();
+            const simpleToaster = new Toaster({
+                delay: 0
+            });
 
             const btn = document.querySelector('#addToast');
             btn.addEventListener('click', e => simpleToaster.create("Toast Title", "Toast Text"));

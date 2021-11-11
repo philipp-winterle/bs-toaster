@@ -70,12 +70,12 @@ class Toaster {
             defaultIconMarkup: DEFAULT_ICON_MARKUP,
         }
     ) {
-        this.position = options.position || TOAST_POSITION.BOTTOM_END;
-        this.type = options.type || TOAST_TYPE.DEFAULT;
-        this.timer = options.timer || TOAST_TIMER.ELAPSED;
-        this.delay = options.delay || DEFAULT_DELAY;
+        this.position = options.position ?? TOAST_POSITION.BOTTOM_END;
+        this.type = options.type ?? TOAST_TYPE.DEFAULT;
+        this.timer = options.timer ?? TOAST_TIMER.ELAPSED;
+        this.delay = options.delay ?? DEFAULT_DELAY;
         this.defaultIconMarkup =
-            options.defaultIconMarkup || DEFAULT_ICON_MARKUP;
+            options.defaultIconMarkup ?? DEFAULT_ICON_MARKUP;
 
         this.toastContainer = this.createToastContainer();
         this.templateNode = this.createToastNode();
@@ -151,11 +151,11 @@ class Toaster {
         }
     ) {
         // Set Options Defaults
-        const type = options.type || this.type;
-        const timer = options.timer || this.timer;
-        const delay = options.delay || this.delay;
-        const animation = options.animation || this.animation;
-        let iconMarkup = options.iconMarkup || this.defaultIconMarkup;
+        const type = options.type ?? this.type;
+        const timer = options.timer ?? this.timer;
+        const delay = options.delay ?? this.delay;
+        const animation = options.animation ?? this.animation;
+        let iconMarkup = options.iconMarkup ?? this.defaultIconMarkup;
 
         // Clone template
         const toastNode = this.templateNode.cloneNode(true);

@@ -5033,11 +5033,12 @@ var Toaster = class {
     __publicField(this, "defaultIconMarkup", DEFAULT_ICON_MARKUP);
     __publicField(this, "templateNode", null);
     __publicField(this, "toastContainer", null);
-    this.position = options.position || TOAST_POSITION.BOTTOM_END;
-    this.type = options.type || TOAST_TYPE.DEFAULT;
-    this.timer = options.timer || TOAST_TIMER.ELAPSED;
-    this.delay = options.delay || DEFAULT_DELAY;
-    this.defaultIconMarkup = options.defaultIconMarkup || DEFAULT_ICON_MARKUP;
+    var _a, _b, _c, _d, _e;
+    this.position = (_a = options.position) != null ? _a : TOAST_POSITION.BOTTOM_END;
+    this.type = (_b = options.type) != null ? _b : TOAST_TYPE.DEFAULT;
+    this.timer = (_c = options.timer) != null ? _c : TOAST_TIMER.ELAPSED;
+    this.delay = (_d = options.delay) != null ? _d : DEFAULT_DELAY;
+    this.defaultIconMarkup = (_e = options.defaultIconMarkup) != null ? _e : DEFAULT_ICON_MARKUP;
     this.toastContainer = this.createToastContainer();
     this.templateNode = this.createToastNode();
     document.body.appendChild(this.toastContainer);
@@ -5090,11 +5091,12 @@ var Toaster = class {
     delay: this.delay,
     animation: true
   }) {
-    const type = options.type || this.type;
-    const timer = options.timer || this.timer;
-    const delay = options.delay || this.delay;
-    const animation = options.animation || this.animation;
-    let iconMarkup = options.iconMarkup || this.defaultIconMarkup;
+    var _a, _b, _c, _d, _e;
+    const type = (_a = options.type) != null ? _a : this.type;
+    const timer = (_b = options.timer) != null ? _b : this.timer;
+    const delay = (_c = options.delay) != null ? _c : this.delay;
+    const animation = (_d = options.animation) != null ? _d : this.animation;
+    let iconMarkup = (_e = options.iconMarkup) != null ? _e : this.defaultIconMarkup;
     const toastNode = this.templateNode.cloneNode(true);
     toastNode.dataset.bsAutohide = (Number.isInteger(delay) && delay > 0).toString();
     toastNode.dataset.bsDelay = delay.toString();
