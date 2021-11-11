@@ -13,7 +13,7 @@ const TOAST_POSITION = {
 };
 
 const TOAST_TYPE = {
-    DEFAULT: "bg-default", // Default
+    DEFAULT: "bg-secondary", // Default
     PRIMARY: "bg-primary",
     INFO: "bg-info",
     SUCCESS: "bg-success",

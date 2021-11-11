@@ -4989,7 +4989,7 @@ var TOAST_POSITION = {
   CENTER: "top-50 start-50 translate-middle"
 };
 var TOAST_TYPE = {
-  DEFAULT: "bg-default",
+  DEFAULT: "bg-secondary",
   PRIMARY: "bg-primary",
   INFO: "bg-info",
   SUCCESS: "bg-success",
