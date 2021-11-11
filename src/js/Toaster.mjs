@@ -1,6 +1,6 @@
 import { Toast } from "bootstrap";
 
-const POSITION = {
+const TOAST_POSITION = {
     TOP_START: "top-0 start-0",
     TOP_CENTER: "top-0 start-50 translate-middle-x",
     TOP_END: "top-0 end-0",
@@ -12,7 +12,7 @@ const POSITION = {
     CENTER: "top-50 start-50 translate-middle",
 };
 
-const TYPE = {
+const TOAST_TYPE = {
     DEFAULT: "bg-default", // Default
     PRIMARY: "bg-primary",
     INFO: "bg-info",
@@ -22,7 +22,7 @@ const TYPE = {
     DARK: "bg-dark",
 };
 
-const TIMER = {
+const TOAST_TIMER = {
     DISABLED: 0,
     ELAPSED: 1, // Default
     COUNTDOWN: 2,
@@ -52,9 +52,9 @@ const TOAST_TEMPLATE = `
  * TODO: Dark Mode
  */
 class Toaster {
-    position = POSITION.BOTTOM_END;
-    type = TYPE.DEFAULT;
-    timer = TIMER.ELAPSED;
+    position = TOAST_POSITION.BOTTOM_END;
+    type = TOAST_TYPE.DEFAULT;
+    timer = TOAST_TIMER.ELAPSED;
     delay = DEFAULT_DELAY;
     defaultIconMarkup = DEFAULT_ICON_MARKUP;
 
@@ -62,9 +62,9 @@ class Toaster {
     toastContainer = null;
 
     constructor({
-        position = POSITION.BOTTOM_END,
-        type = TYPE.DEFAULT,
-        timer = TIMER.ELAPSED,
+        position = TOAST_POSITION.BOTTOM_END,
+        type = TOAST_TYPE.DEFAULT,
+        timer = TOAST_TIMER.ELAPSED,
         delay = DEFAULT_DELAY,
         defaultIconMarkup = DEFAULT_ICON_MARKUP,
     }) {
@@ -99,7 +99,7 @@ class Toaster {
 
     renderTime(timerOption, delay, timerNode, toastNode) {
         switch (timerOption) {
-            case TIMER.ELAPSED: {
+            case TOAST_TIMER.ELAPSED: {
                 timerNode.innerText = "just now";
                 // Start a timer that updates the text of the time indicator every minute
                 let minutes = 1;
@@ -114,7 +114,7 @@ class Toaster {
                 });
                 break;
             }
-            case TIMER.COUNTDOWN: {
+            case TOAST_TIMER.COUNTDOWN: {
                 if (delay > 0) {
                     let seconds = delay / 1000;
                     timerNode.innerText = `${seconds}s`;
@@ -193,8 +193,8 @@ class Toaster {
 
 export {
     Toaster,
-    TYPE as ToasterType,
-    POSITION as ToasterPosition,
-    TIMER as ToasterTimer,
+    TOAST_TYPE as ToasterType,
+    TOAST_POSITION as ToasterPosition,
+    TOAST_TIMER as ToasterTimer,
 };
 export default Toaster;

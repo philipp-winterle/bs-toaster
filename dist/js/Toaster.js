@@ -4977,7 +4977,7 @@ enableDismissTrigger(Toast);
 defineJQueryPlugin(Toast);
 
 // src/js/Toaster.mjs
-var POSITION = {
+var TOAST_POSITION = {
   TOP_START: "top-0 start-0",
   TOP_CENTER: "top-0 start-50 translate-middle-x",
   TOP_END: "top-0 end-0",
@@ -4988,7 +4988,7 @@ var POSITION = {
   CENTER_END: "top-50 end-0 translate-middle-y",
   CENTER: "top-50 start-50 translate-middle"
 };
-var TYPE = {
+var TOAST_TYPE = {
   DEFAULT: "bg-default",
   PRIMARY: "bg-primary",
   INFO: "bg-info",
@@ -4997,13 +4997,13 @@ var TYPE = {
   DANGER: "bg-danger",
   DARK: "bg-dark"
 };
-var TIMER = {
+var TOAST_TIMER = {
   DISABLED: 0,
   ELAPSED: 1,
   COUNTDOWN: 2
 };
 var DEFAULT_DELAY = 5e3;
-var DEFAULT_ICON = `<i class="p-2 me-2 rounded %TYPE%"></i>`;
+var DEFAULT_ICON_MARKUP = `<i class="p-2 me-2 rounded %TYPE%"></i>`;
 var TOAST_CONTAINER_TEMLATE = `<div class="toast-container position-fixed m-3" aria-live="polite"></div>`;
 var TOAST_TEMPLATE = `
 <div class="toast fade" role="alert" aria-live="assertive" aria-atomic="true">
@@ -5020,24 +5020,24 @@ var TOAST_TEMPLATE = `
 `;
 var Toaster = class {
   constructor({
-    position = POSITION.BOTTOM_END,
-    type = TYPE.DEFAULT,
-    timer = TIMER.ELAPSED,
+    position = TOAST_POSITION.BOTTOM_END,
+    type = TOAST_TYPE.DEFAULT,
+    timer = TOAST_TIMER.ELAPSED,
     delay = DEFAULT_DELAY,
-    icon = DEFAULT_ICON
+    defaultIconMarkup = DEFAULT_ICON_MARKUP
   }) {
-    __publicField(this, "position", POSITION.BOTTOM_END);
-    __publicField(this, "type", TYPE.DEFAULT);
-    __publicField(this, "timer", TIMER.ELAPSED);
+    __publicField(this, "position", TOAST_POSITION.BOTTOM_END);
+    __publicField(this, "type", TOAST_TYPE.DEFAULT);
+    __publicField(this, "timer", TOAST_TIMER.ELAPSED);
     __publicField(this, "delay", DEFAULT_DELAY);
-    __publicField(this, "icon", DEFAULT_ICON);
+    __publicField(this, "defaultIconMarkup", DEFAULT_ICON_MARKUP);
     __publicField(this, "templateNode", null);
     __publicField(this, "toastContainer", null);
     this.position = position;
     this.type = type;
     this.timer = timer;
     this.delay = delay;
-    this.icon = icon;
+    this.defaultIconMarkup = defaultIconMarkup;
     this.toastContainer = this.createToastContainer();
     this.templateNode = this.createToastNode();
     document.body.appendChild(this.toastContainer);
@@ -5045,17 +5045,18 @@ var Toaster = class {
   createToastContainer() {
     const containerNode = new DOMParser().parseFromString(TOAST_CONTAINER_TEMLATE, "text/html").body.childNodes[0];
     containerNode.classList.add(...this.position.split(" "));
+    return containerNode;
   }
   createToastNode() {
     return new DOMParser().parseFromString(TOAST_TEMPLATE, "text/html").body.childNodes[0];
   }
   renderTime(timerOption, delay, timerNode, toastNode) {
     switch (timerOption) {
-      case TIMER.ELAPSED: {
+      case TOAST_TIMER.ELAPSED: {
         timerNode.innerText = "just now";
         let minutes = 1;
         let timerInterval = setInterval(() => {
-          timerNode.innerText = `${minutes}m ago`;
+          timerNode.innerText = `${minutes}m`;
           minutes++;
         }, 60 * 1e3);
         toastNode.addEventListener("hidden.bs.toast", () => {
@@ -5063,7 +5064,7 @@ var Toaster = class {
         });
         break;
       }
-      case TIMER.COUNTDOWN: {
+      case TOAST_TIMER.COUNTDOWN: {
         if (delay > 0) {
           let seconds = delay / 1e3;
           timerNode.innerText = `${seconds}s`;
@@ -5083,18 +5084,23 @@ var Toaster = class {
     }
   }
   create(title, text, {
-    icon = DEFAULT_ICON,
-    type = TYPE.DEFAULT,
-    timer = TIMER.ELAPSED,
-    delay = DEFAULT_DELAY,
+    iconMarkup = this.defaultIconMarkup,
+    type = this.type,
+    timer = this.timer,
+    delay = this.delay,
     animation = true
   }) {
     const toastNode = this.templateNode.cloneNode(true);
     toastNode.dataset.bsAutohide = (Number.isInteger(delay) && delay > 0).toString();
     toastNode.dataset.bsDelay = delay.toString();
     toastNode.dataset.bsAnimation = animation.toString();
-    icon = icon.replace("%TYPE%", type);
-    toastNode.querySelector(".bs-toaster-icon").innerHTML = icon;
+    const iconNode = toastNode.querySelector(".bs-toaster-icon");
+    if (iconMarkup) {
+      iconMarkup = iconMarkup.replace("%TYPE%", type);
+      iconNode.innerHTML = iconMarkup;
+    } else {
+      iconNode.remove();
+    }
     toastNode.querySelector(".bs-toaster-title").innerHTML = title;
     toastNode.querySelector(".bs-toaster-text").innerHTML = text;
     const timerNode = toastNode.querySelector(".bs-toaster-timer");
@@ -5113,9 +5119,9 @@ var Toaster = class {
 var Toaster_default = Toaster;
 export {
   Toaster,
-  POSITION as ToasterPosition,
-  TIMER as ToasterTimer,
-  TYPE as ToasterType,
+  TOAST_POSITION as ToasterPosition,
+  TOAST_TIMER as ToasterTimer,
+  TOAST_TYPE as ToasterType,
   Toaster_default as default
 };
 /*!
