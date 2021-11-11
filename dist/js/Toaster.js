@@ -5003,6 +5003,7 @@ var TOAST_TIMER = {
   COUNTDOWN: 2
 };
 var DEFAULT_DELAY = 5e3;
+var DEFAULT_ANIMATION = true;
 var DEFAULT_ICON_MARKUP = `<i class="p-2 me-2 rounded %TYPE%"></i>`;
 var TOAST_CONTAINER_TEMLATE = `<div class="toast-container position-fixed m-3" aria-live="polite"></div>`;
 var TOAST_TEMPLATE = `
@@ -5024,21 +5025,24 @@ var Toaster = class {
     type: TOAST_TYPE.DEFAULT,
     timer: TOAST_TIMER.ELAPSED,
     delay: DEFAULT_DELAY,
-    defaultIconMarkup: DEFAULT_ICON_MARKUP
+    defaultIconMarkup: DEFAULT_ICON_MARKUP,
+    animation: DEFAULT_ANIMATION
   }) {
     __publicField(this, "position", TOAST_POSITION.BOTTOM_END);
     __publicField(this, "type", TOAST_TYPE.DEFAULT);
     __publicField(this, "timer", TOAST_TIMER.ELAPSED);
     __publicField(this, "delay", DEFAULT_DELAY);
+    __publicField(this, "animation", DEFAULT_ANIMATION);
     __publicField(this, "defaultIconMarkup", DEFAULT_ICON_MARKUP);
     __publicField(this, "templateNode", null);
     __publicField(this, "toastContainer", null);
-    var _a, _b, _c, _d, _e;
+    var _a, _b, _c, _d, _e, _f;
     this.position = (_a = options.position) != null ? _a : TOAST_POSITION.BOTTOM_END;
     this.type = (_b = options.type) != null ? _b : TOAST_TYPE.DEFAULT;
     this.timer = (_c = options.timer) != null ? _c : TOAST_TIMER.ELAPSED;
-    this.delay = (_d = options.delay) != null ? _d : DEFAULT_DELAY;
-    this.defaultIconMarkup = (_e = options.defaultIconMarkup) != null ? _e : DEFAULT_ICON_MARKUP;
+    this.animation = (_d = options.animation) != null ? _d : DEFAULT_ANIMATION;
+    this.delay = (_e = options.delay) != null ? _e : DEFAULT_DELAY;
+    this.defaultIconMarkup = (_f = options.defaultIconMarkup) != null ? _f : DEFAULT_ICON_MARKUP;
     this.toastContainer = this.createToastContainer();
     this.templateNode = this.createToastNode();
     document.body.appendChild(this.toastContainer);
@@ -5089,7 +5093,7 @@ var Toaster = class {
     type: this.type,
     timer: this.timer,
     delay: this.delay,
-    animation: true
+    animation: this.animation
   }) {
     var _a, _b, _c, _d, _e;
     const type = (_a = options.type) != null ? _a : this.type;

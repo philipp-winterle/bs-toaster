@@ -19,11 +19,36 @@
                 delay: 0
             });
 
-            const btn = document.querySelector('#addToast');
-            btn.addEventListener('click', e => simpleToaster.create("Toast Title", "Toast Text"));
+            const btns = document.querySelectorAll('.addToast');
+            for (const btn of btns) {
+
+                const typePair = Object.entries(ToasterType)
+                    .find(entry => {
+                        const [key, value] = entry;
+                        return key === btn.dataset.type;
+                    });
+                const type = typePair[1];
+
+                btn.addEventListener('click', e => simpleToaster.create("Toast Title", "Toast Text", {
+                    type: type,
+                    animation: true
+                }));
+            }
+
         </script>
     </head>
     <body>
-        <button id="addToast">Add new Toast</button>
+        <div class="container d-flex justify-content-center align-items-center vh-100">
+            <div class="row">
+                <div class="col-auto">
+                    <button class="btn btn-secondary btn-lg addToast" data-type="DEFAULT">Add new Default Toast</button>
+                    <button class="btn btn-primary btn-lg addToast" data-type="PRIMARY">Add new Primary Toast</button>
+                    <button class="btn btn-warning btn-lg addToast" data-type="WARNING">Add new Warning Toast</button>
+                    <button class="btn btn-danger btn-lg addToast" data-type="DANGER">Add new Danger Toast</button>
+
+                </div>
+            </div>
+        </div>
+
     </body>
 </html>

@@ -30,6 +30,8 @@ const TOAST_TIMER = {
 
 const DEFAULT_DELAY = 5000;
 
+const DEFAULT_ANIMATION = true;
+
 const DEFAULT_ICON_MARKUP = `<i class="p-2 me-2 rounded %TYPE%"></i>`;
 
 const TOAST_CONTAINER_TEMLATE = `<div class="toast-container position-fixed m-3" aria-live="polite"></div>`;
@@ -56,6 +58,7 @@ class Toaster {
     type = TOAST_TYPE.DEFAULT;
     timer = TOAST_TIMER.ELAPSED;
     delay = DEFAULT_DELAY;
+    animation = DEFAULT_ANIMATION;
     defaultIconMarkup = DEFAULT_ICON_MARKUP;
 
     templateNode = null;
@@ -68,11 +71,13 @@ class Toaster {
             timer: TOAST_TIMER.ELAPSED,
             delay: DEFAULT_DELAY,
             defaultIconMarkup: DEFAULT_ICON_MARKUP,
+            animation: DEFAULT_ANIMATION,
         }
     ) {
         this.position = options.position ?? TOAST_POSITION.BOTTOM_END;
         this.type = options.type ?? TOAST_TYPE.DEFAULT;
         this.timer = options.timer ?? TOAST_TIMER.ELAPSED;
+        this.animation = options.animation ?? DEFAULT_ANIMATION;
         this.delay = options.delay ?? DEFAULT_DELAY;
         this.defaultIconMarkup =
             options.defaultIconMarkup ?? DEFAULT_ICON_MARKUP;
@@ -147,7 +152,7 @@ class Toaster {
             type: this.type,
             timer: this.timer,
             delay: this.delay,
-            animation: true,
+            animation: this.animation,
         }
     ) {
         // Set Options Defaults
