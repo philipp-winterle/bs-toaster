@@ -457,7 +457,7 @@ function roundOffsetsByDPR(_ref) {
 }
 function mapToStyles(_ref2) {
   var _Object$assign2;
-  var popper2 = _ref2.popper, popperRect = _ref2.popperRect, placement = _ref2.placement, variation = _ref2.variation, offsets = _ref2.offsets, position2 = _ref2.position, gpuAcceleration = _ref2.gpuAcceleration, adaptive = _ref2.adaptive, roundOffsets = _ref2.roundOffsets;
+  var popper2 = _ref2.popper, popperRect = _ref2.popperRect, placement = _ref2.placement, variation = _ref2.variation, offsets = _ref2.offsets, position = _ref2.position, gpuAcceleration = _ref2.gpuAcceleration, adaptive = _ref2.adaptive, roundOffsets = _ref2.roundOffsets;
   var _ref3 = roundOffsets === true ? roundOffsetsByDPR(offsets) : typeof roundOffsets === "function" ? roundOffsets(offsets) : offsets, _ref3$x = _ref3.x, x = _ref3$x === void 0 ? 0 : _ref3$x, _ref3$y = _ref3.y, y = _ref3$y === void 0 ? 0 : _ref3$y;
   var hasX = offsets.hasOwnProperty("x");
   var hasY = offsets.hasOwnProperty("y");
@@ -470,7 +470,7 @@ function mapToStyles(_ref2) {
     var widthProp = "clientWidth";
     if (offsetParent === getWindow(popper2)) {
       offsetParent = getDocumentElement(popper2);
-      if (getComputedStyle2(offsetParent).position !== "static" && position2 === "absolute") {
+      if (getComputedStyle2(offsetParent).position !== "static" && position === "absolute") {
         heightProp = "scrollHeight";
         widthProp = "scrollWidth";
       }
@@ -488,7 +488,7 @@ function mapToStyles(_ref2) {
     }
   }
   var commonStyles = Object.assign({
-    position: position2
+    position
   }, adaptive && unsetSides);
   if (gpuAcceleration) {
     var _Object$assign;
@@ -5020,11 +5020,11 @@ var TOAST_TEMPLATE = `
 `;
 var Toaster = class {
   constructor(options = {
-    position,
-    type,
-    timer,
-    delay,
-    defaultIconMarkup
+    position: TOAST_POSITION.BOTTOM_END,
+    type: TOAST_TYPE.DEFAULT,
+    timer: TOAST_TIMER.ELAPSED,
+    delay: DEFAULT_DELAY,
+    defaultIconMarkup: DEFAULT_ICON_MARKUP
   }) {
     __publicField(this, "position", TOAST_POSITION.BOTTOM_END);
     __publicField(this, "type", TOAST_TYPE.DEFAULT);
@@ -5050,7 +5050,7 @@ var Toaster = class {
   createToastNode() {
     return new DOMParser().parseFromString(TOAST_TEMPLATE, "text/html").body.childNodes[0];
   }
-  renderTime(timerOption, delay2, timerNode, toastNode) {
+  renderTime(timerOption, delay, timerNode, toastNode) {
     switch (timerOption) {
       case TOAST_TIMER.ELAPSED: {
         timerNode.innerText = "just now";
@@ -5065,8 +5065,8 @@ var Toaster = class {
         break;
       }
       case TOAST_TIMER.COUNTDOWN: {
-        if (delay2 > 0) {
-          let seconds = delay2 / 1e3;
+        if (delay > 0) {
+          let seconds = delay / 1e3;
           timerNode.innerText = `${seconds}s`;
           let countdownTimer = setInterval(() => {
             timerNode.innerText = `${--seconds}s`;
@@ -5084,32 +5084,32 @@ var Toaster = class {
     }
   }
   create(title, text, options = {
-    iconMarkup,
-    type,
-    timer,
-    delay,
-    animation
+    iconMarkup: this.defaultIconMarkup,
+    type: this.type,
+    timer: this.timer,
+    delay: this.delay,
+    animation: true
   }) {
-    const type2 = options.type || this.type;
-    const timer2 = options.timer || this.timer;
-    const delay2 = options.delay || this.delay;
-    const animation2 = options.animation || this.animation;
-    let iconMarkup2 = options.iconMarkup || this.defaultIconMarkup;
+    const type = options.type || this.type;
+    const timer = options.timer || this.timer;
+    const delay = options.delay || this.delay;
+    const animation = options.animation || this.animation;
+    let iconMarkup = options.iconMarkup || this.defaultIconMarkup;
     const toastNode = this.templateNode.cloneNode(true);
-    toastNode.dataset.bsAutohide = (Number.isInteger(delay2) && delay2 > 0).toString();
-    toastNode.dataset.bsDelay = delay2.toString();
-    toastNode.dataset.bsAnimation = animation2.toString();
+    toastNode.dataset.bsAutohide = (Number.isInteger(delay) && delay > 0).toString();
+    toastNode.dataset.bsDelay = delay.toString();
+    toastNode.dataset.bsAnimation = animation.toString();
     const iconNode = toastNode.querySelector(".bs-toaster-icon");
-    if (iconMarkup2) {
-      iconMarkup2 = iconMarkup2.replace("%TYPE%", type2);
-      iconNode.innerHTML = iconMarkup2;
+    if (iconMarkup) {
+      iconMarkup = iconMarkup.replace("%TYPE%", type);
+      iconNode.innerHTML = iconMarkup;
     } else {
       iconNode.remove();
     }
     toastNode.querySelector(".bs-toaster-title").innerHTML = title;
     toastNode.querySelector(".bs-toaster-text").innerHTML = text;
     const timerNode = toastNode.querySelector(".bs-toaster-timer");
-    this.renderTime(timer2, delay2, timerNode, toastNode);
+    this.renderTime(timer, delay, timerNode, toastNode);
     this.render(toastNode);
   }
   render(toastNode) {

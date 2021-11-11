@@ -63,11 +63,11 @@ class Toaster {
 
     constructor(
         options = {
-            position,
-            type,
-            timer,
-            delay,
-            defaultIconMarkup,
+            position: TOAST_POSITION.BOTTOM_END,
+            type: TOAST_TYPE.DEFAULT,
+            timer: TOAST_TIMER.ELAPSED,
+            delay: DEFAULT_DELAY,
+            defaultIconMarkup: DEFAULT_ICON_MARKUP,
         }
     ) {
         this.position = options.position || TOAST_POSITION.BOTTOM_END;
@@ -143,11 +143,11 @@ class Toaster {
         title,
         text,
         options = {
-            iconMarkup,
-            type,
-            timer,
-            delay,
-            animation,
+            iconMarkup: this.defaultIconMarkup,
+            type: this.type,
+            timer: this.timer,
+            delay: this.delay,
+            animation: true,
         }
     ) {
         // Set Options Defaults
