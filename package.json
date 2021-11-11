@@ -1,6 +1,6 @@
 {
     "name": "bs-toaster",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "A Boostrap 5 Toast Framework. Easy to use and no other dependecies than Bootstrap itself.",
     "keywords": [
         "bootstrap-toast",
@@ -17,9 +17,9 @@
     "main": "dist/js/Toaster.js",
     "repository": "https://github.com/hummal/bs-toaster.git",
     "bugs": {
-        "url": "ttps://github.com/hummal/bs-toaster/issues"
+        "url": "https://github.com/hummal/bs-toaster/issues"
     },
-    "homepage": "ttps://github.com/hummal/bs-toaster",
+    "homepage": "https://hummal.github.io/bs-toaster",
     "author": "philipp.winterle <philipp.winterle@gmail.com>",
     "type": "module",
     "engines": {
