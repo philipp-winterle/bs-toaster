@@ -23,6 +23,8 @@ A Bootstrap 5 Toast Framework - Easy to use. No other dependencies than Bootstra
 
 [Simple Demo](https://hummal.github.io/bs-toaster/examples/simple.html)
 
+[CodePen](https://codepen.io/hummal/pen/RwZOowY)
+
 ## Getting Started
 
 ### Supported Browsers
