@@ -34,7 +34,8 @@ A Bootstrap 5 Toast Framework - Easy to use. No other dependencies than Bootstra
 
 ### Requirements
 
--   Bootstrap 5
+-   Bootstrap 5 [NPM Package](https://www.npmjs.com/package/bootstrap)
+-   Popperjs \* (Is included in this package)
 
 ### Installation
 
