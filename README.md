@@ -41,7 +41,7 @@ A Bootstrap 5 Toast Framework - Easy to use. No other dependencies than Bootstra
 
 ### Installation
 
-Because nodejs 10 is out of LTS we can make the use of esm modules. This package will only come as esm module.
+Because nodejs 14 is out of LTS we can make the use of esm modules. This package will only come as esm module.
 
 ```bash
 npm i bs-toaster
@@ -50,6 +50,8 @@ npm i bs-toaster
 ```bash
 yarn add bs-toaster
 ```
+
+Remember to keep track of peerDependency Bootstrap if you are using yarn. Yarn does not install boostrap as a peerDependecies but only checks if it is there. You have to have it in your project already to being able to use Toaster.
 
 ### Usage
 
