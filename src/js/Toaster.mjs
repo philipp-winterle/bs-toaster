@@ -34,7 +34,7 @@ const DEFAULT_ANIMATION = true;
 
 const DEFAULT_ICON_MARKUP = `<i class="p-2 me-2 rounded %TYPE%"></i>`;
 
-const TOAST_CONTAINER_TEMLATE = `<div class="toast-container position-fixed m-3" aria-live="polite"></div>`;
+const TOAST_CONTAINER_TEMLATE = `<div class="toast-container position-fixed m-3" aria-live="polite" style="z-index:99999;"></div>`;
 
 const TOAST_TEMPLATE = `
 <div class="toast fade" role="alert" aria-live="assertive" aria-atomic="true">
