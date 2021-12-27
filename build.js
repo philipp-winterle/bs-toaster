@@ -9,6 +9,7 @@ buildSync({
     target: ["es2020", "chrome75", "firefox78", "safari14", "edge90", "node14"],
     outdir: "./dist/js",
     format: "esm",
-    minify: false,
+    minify: true,
     platform: "browser",
+    external: ["bootstrap"],
 });
