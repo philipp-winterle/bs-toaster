@@ -91,7 +91,7 @@ class Toaster {
 
     createToastContainer() {
         // Check if there is already a container with the same positioning
-        const base64Position = atob(this.position);
+        const base64Position = btoa(this.position);
 
         const existingToastContainer = document.querySelector(
             `[data-bs-toaster="${base64Position}"]`

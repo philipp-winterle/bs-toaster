@@ -5048,7 +5048,7 @@ var Toaster = class {
     document.body.appendChild(this.toastContainer);
   }
   createToastContainer() {
-    const base64Position = atob(this.position);
+    const base64Position = btoa(this.position);
     const existingToastContainer = document.querySelector(`[data-bs-toaster="${base64Position}"]`);
     let containerNode = null;
     if (existingToastContainer === null) {
