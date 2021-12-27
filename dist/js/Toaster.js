@@ -5079,7 +5079,7 @@ var Toaster = class {
     const base64Position = btoa(this.position);
     const existingToastContainer = document.querySelector(`[data-bs-toaster="${base64Position}"]`);
     let containerNode = null;
-    if (existingToastContainer === null && existingToastContainer instanceof HTMLDivElement) {
+    if (existingToastContainer === null || existingToastContainer instanceof HTMLDivElement === false) {
       containerNode = new DOMParser().parseFromString(TOAST_CONTAINER_TEMLATE, "text/html").body.childNodes[0];
       containerNode.classList.add(...this.position.split(" "));
       containerNode.dataset.bsToaster = base64Position;
