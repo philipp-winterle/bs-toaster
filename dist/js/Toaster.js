@@ -5052,9 +5052,9 @@ var Toaster = class {
     const existingToastContainer = document.querySelector(`[data-bs-toaster="${base64Position}"]`);
     let containerNode = null;
     if (existingToastContainer === null) {
-      const containerNode2 = new DOMParser().parseFromString(TOAST_CONTAINER_TEMLATE, "text/html").body.childNodes[0];
-      containerNode2.classList.add(...this.position.split(" "));
-      containerNode2.dataset.bsToaster = base64Position;
+      containerNode = new DOMParser().parseFromString(TOAST_CONTAINER_TEMLATE, "text/html").body.childNodes[0];
+      containerNode.classList.add(...this.position.split(" "));
+      containerNode.dataset.bsToaster = base64Position;
     } else {
       containerNode = existingToastContainer;
     }
