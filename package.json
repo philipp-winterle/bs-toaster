@@ -1,6 +1,6 @@
 {
     "name": "bs-toaster",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "A Boostrap 5 Toast Framework. Easy to use and no other dependecies than Bootstrap itself.",
     "keywords": [
         "bootstrap-toast",
