@@ -25,9 +25,13 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
+      # INstall NPM 7 for peerDependecy usage
+      - name: Install npm 7
+        run: npm i -g npm@7 --registry=https://registry.npmjs.org
+
       # Runs a single command using the runners shell
       - name: Run npm install
-        run: npm i
+        run: npm ci
 
       # Runs a set of commands using the runners shell
       - name: Run npm build
