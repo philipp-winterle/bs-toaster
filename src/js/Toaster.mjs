@@ -100,7 +100,7 @@ class Toaster {
         let containerNode = null;
 
         if (existingToastContainer === null) {
-            const containerNode = new DOMParser().parseFromString(
+            containerNode = new DOMParser().parseFromString(
                 TOAST_CONTAINER_TEMLATE,
                 "text/html"
             ).body.childNodes[0];
