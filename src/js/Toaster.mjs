@@ -99,7 +99,10 @@ class Toaster {
 
         let containerNode = null;
 
-        if (existingToastContainer === null) {
+        if (
+            existingToastContainer === null &&
+            existingToastContainer instanceof HTMLDivElement
+        ) {
             containerNode = new DOMParser().parseFromString(
                 TOAST_CONTAINER_TEMLATE,
                 "text/html"

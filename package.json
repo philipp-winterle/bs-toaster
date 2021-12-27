@@ -30,7 +30,7 @@
         "@popperjs/core": "^2.11.0"
     },
     "peerDependencies": {
-        "bootstrap": "5.x"
+        "bootstrap": "5.x.x"
     },
     "scripts": {
         "test": "echo \"Error: no test specified\"",
