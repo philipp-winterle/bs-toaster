@@ -34,7 +34,7 @@ const DEFAULT_ANIMATION = true;
 
 const DEFAULT_ICON_MARKUP = `<i class="p-2 me-2 rounded %TYPE%"></i>`;
 
-const TOAST_CONTAINER_TEMLATE = `<div class="toast-container position-fixed m-3" aria-live="polite" style="z-index:99999;"></div>`;
+const TOAST_CONTAINER_TEMLATE = `<div data-bs-toaster="" class="toast-container position-fixed m-3" aria-live="polite" style="z-index:999999;"></div>`;
 
 const TOAST_TEMPLATE = `
 <div class="toast fade" role="alert" aria-live="assertive" aria-atomic="true">
@@ -90,12 +90,27 @@ class Toaster {
     }
 
     createToastContainer() {
-        const containerNode = new DOMParser().parseFromString(
-            TOAST_CONTAINER_TEMLATE,
-            "text/html"
-        ).body.childNodes[0];
+        // Check if there is already a container with the same positioning
+        const base64Position = atob(this.position);
 
-        containerNode.classList.add(...this.position.split(" "));
+        const existingToastContainer = document.querySelector(
+            `[data-bs-toaster="${base64Position}"]`
+        );
+
+        let containerNode = null;
+
+        if (existingToastContainer === null) {
+            const containerNode = new DOMParser().parseFromString(
+                TOAST_CONTAINER_TEMLATE,
+                "text/html"
+            ).body.childNodes[0];
+
+            containerNode.classList.add(...this.position.split(" "));
+
+            containerNode.dataset.bsToaster = base64Position;
+        } else {
+            containerNode = existingToastContainer;
+        }
 
         return containerNode;
     }

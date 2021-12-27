@@ -5005,7 +5005,7 @@ var TOAST_TIMER = {
 var DEFAULT_DELAY = 5e3;
 var DEFAULT_ANIMATION = true;
 var DEFAULT_ICON_MARKUP = `<i class="p-2 me-2 rounded %TYPE%"></i>`;
-var TOAST_CONTAINER_TEMLATE = `<div class="toast-container position-fixed m-3" aria-live="polite"></div>`;
+var TOAST_CONTAINER_TEMLATE = `<div data-bs-toaster="" class="toast-container position-fixed m-3" aria-live="polite" style="z-index:999999;"></div>`;
 var TOAST_TEMPLATE = `
 <div class="toast fade" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="toast-header">
@@ -5048,8 +5048,16 @@ var Toaster = class {
     document.body.appendChild(this.toastContainer);
   }
   createToastContainer() {
-    const containerNode = new DOMParser().parseFromString(TOAST_CONTAINER_TEMLATE, "text/html").body.childNodes[0];
-    containerNode.classList.add(...this.position.split(" "));
+    const base64Position = atob(this.position);
+    const existingToastContainer = document.querySelector(`[data-bs-toaster="${base64Position}"]`);
+    let containerNode = null;
+    if (existingToastContainer === null) {
+      const containerNode2 = new DOMParser().parseFromString(TOAST_CONTAINER_TEMLATE, "text/html").body.childNodes[0];
+      containerNode2.classList.add(...this.position.split(" "));
+      containerNode2.dataset.bsToaster = base64Position;
+    } else {
+      containerNode = existingToastContainer;
+    }
     return containerNode;
   }
   createToastNode() {
