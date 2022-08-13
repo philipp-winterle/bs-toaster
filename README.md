@@ -68,6 +68,11 @@ import {
 } from "bs-toaster";
 ```
 
+#### Bundle usage
+
+You can also use bs-toaster without compilation as a bundle.
+Simply copy the file Toaster.bundle.js from /dist/js folder.
+
 ##### Initilization
 
 ```javascript
