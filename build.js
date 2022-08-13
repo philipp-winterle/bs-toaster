@@ -11,5 +11,20 @@ buildSync({
     format: "esm",
     minify: true,
     platform: "browser",
+    treeShaking: true,
     external: ["bootstrap"],
+});
+
+buildSync({
+    entryPoints: {
+        Toaster: "src/js/Toaster.mjs",
+    },
+    bundle: true,
+    write: true,
+    target: ["chrome75", "firefox78", "safari14", "edge90"],
+    outfile: "./dist/js/Toaster.bundle.js",
+    format: "esm",
+    minify: true,
+    treeShaking: true,
+    platform: "browser",
 });
